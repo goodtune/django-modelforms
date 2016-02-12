@@ -2,7 +2,7 @@ from setuptools import setup, find_packages
 
 setup(
     name='django-modelforms',
-    version='0.0.0',
+    version='0.1.0',
     author='Touch Technology Pty Ltd',
     author_email='info@touchtechnology.com.au',
     maintainer='Gary Reynolds',
