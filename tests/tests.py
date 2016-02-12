@@ -1,6 +1,7 @@
 from django.apps import apps
+from django.db.utils import IntegrityError
 from django.forms.models import modelform_factory
-from django.test import TestCase
+from test_plus import TestCase
 
 from modelforms.forms import ModelForm
 
@@ -69,4 +70,23 @@ class UniqueTogether(TestCase):
                 'rrp': [u'Ensure that there are no more than 3 digits before '
                         u'the decimal point.'],
             },
+        )
+
+    def test_update_view(self):
+        data = {
+            'title': self.book1.title,
+        }
+        with self.assertRaises(IntegrityError):
+            self.post('update-book', self.book2.pk, data=data)
+
+    def test_unique_update_view(self):
+        data = {
+            'title': self.book1.title,
+        }
+        self.post('unique-update-book', self.book2.pk, data=data)
+        self.assertFormError(
+            self.last_response,
+            'form',
+            'title',
+            [u'Book with this title already exists.'],
         )
