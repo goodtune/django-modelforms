@@ -1,5 +1,8 @@
 # django-modelforms
 
+[![Codeship Status](https://codeship.com/projects/bb8fe870-b46c-0133-5bfb-2e1f5f4040fe/status?branch=master)](https://codeship.com/projects/133944)
+[![Coverage Status](https://coveralls.io/repos/bitbucket/touchtechnology/django-modelforms/badge.svg?branch=master)](https://coveralls.io/bitbucket/touchtechnology/django-modelforms?branch=master)
+
 This project came about because our reusable administration has to deal with
 related models that have `unique_together` constraints that were not being
 properly validated by the default implementation.
