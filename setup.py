@@ -10,7 +10,7 @@ setup(
     description='Improvements to django.forms.ModelForm',
     license='BSD',
     install_requires=[
-        'django>=1.7',
+        'django',
     ],
     packages=find_packages(),
 )

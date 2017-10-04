@@ -15,7 +15,7 @@ class UniqueTogetherMixin(object):
 
         try:
             super(UniqueTogetherMixin, self).clean()
-        except ValidationError, e:
+        except ValidationError as e:
             e.update_error_dict(errors)
 
         unique_together = {}
