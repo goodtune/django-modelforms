@@ -28,7 +28,7 @@ class UniqueTogetherMixin(object):
         queryset = manager.exclude(pk=self.instance.pk)
         for field_name in unique_together:
             kw = dict([
-                (f, self.cleaned_data.get(f, getattr(self.instance, f)))
+                (f, self.cleaned_data.get(f, getattr(self.instance, f, None)))
                 for f in unique_together[field_name]
             ])
             if queryset.filter(**kw):
