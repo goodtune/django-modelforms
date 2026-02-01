@@ -1,0 +1,68 @@
+[build-system]
+requires = ["hatchling"]
+build-backend = "hatchling.build"
+
+[project]
+name = "django-modelforms"
+version = "1.0.0"
+description = "Improvements to django.forms.ModelForm - validates unique_together and UniqueConstraint"
+readme = "README.md"
+license = "BSD-3-Clause"
+authors = [
+    { name = "Touch Technology Pty Ltd", email = "info@touchtechnology.com.au" },
+]
+maintainers = [
+    { name = "Gary Reynolds", email = "gary.reynolds@touchtechnology.com.au" },
+]
+classifiers = [
+    "Development Status :: 5 - Production/Stable",
+    "Environment :: Web Environment",
+    "Framework :: Django",
+    "Framework :: Django :: 4.2",
+    "Framework :: Django :: 5.2",
+    "Framework :: Django :: 6.0",
+    "Intended Audience :: Developers",
+    "License :: OSI Approved :: BSD License",
+    "Operating System :: OS Independent",
+    "Programming Language :: Python :: 3",
+    "Programming Language :: Python :: 3.10",
+    "Programming Language :: Python :: 3.11",
+    "Programming Language :: Python :: 3.12",
+    "Programming Language :: Python :: 3.13",
+    "Topic :: Internet :: WWW/HTTP",
+    "Topic :: Software Development :: Libraries :: Python Modules",
+]
+requires-python = ">=3.10"
+dependencies = [
+    "django>=4.2",
+]
+
+[project.urls]
+Homepage = "https://github.com/goodtune/django-modelforms"
+Repository = "https://github.com/goodtune/django-modelforms"
+Issues = "https://github.com/goodtune/django-modelforms/issues"
+
+[tool.hatch.build.targets.wheel]
+packages = ["modelforms"]
+
+[tool.hatch.build.targets.sdist]
+include = [
+    "/modelforms",
+    "/tests",
+    "/README.md",
+    "/LICENSE",
+]
+
+[tool.coverage.run]
+source = ["modelforms"]
+branch = true
+
+[tool.coverage.report]
+exclude_lines = [
+    "pragma: no cover",
+    "if TYPE_CHECKING:",
+]
+
+[tool.pytest.ini_options]
+DJANGO_SETTINGS_MODULE = "tests.settings"
+python_files = ["tests.py", "test_*.py"]

@@ -9,12 +9,13 @@ class UpdateView(edit.UpdateView):
     """
     View for updating an object, with a response rendered by template.
     """
+
     def get_form_class(self):
-        form_class = super(UpdateView, self).get_form_class()
+        form_class = super().get_form_class()
 
         if issubclass(form_class, UniqueTogetherMixin):
             return form_class
 
-        return modelform_factory(form_class._meta.model,
-                                 ModelForm,
-                                 fields=self.fields)
+        return modelform_factory(
+            form_class._meta.model, ModelForm, fields=self.fields
+        )
