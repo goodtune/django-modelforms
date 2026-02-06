@@ -9,10 +9,7 @@ description = "Improvements to django.forms.ModelForm - validates unique_togethe
 readme = "README.md"
 license = "BSD-3-Clause"
 authors = [
-    { name = "Touch Technology Pty Ltd", email = "info@touchtechnology.com.au" },
-]
-maintainers = [
-    { name = "Gary Reynolds", email = "gary.reynolds@touchtechnology.com.au" },
+    { name = "Gary Reynolds", email = "gary@touch.asn.au" },
 ]
 classifiers = [
     "Development Status :: 5 - Production/Stable",
