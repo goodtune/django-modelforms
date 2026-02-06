@@ -32,6 +32,9 @@ ENV/
 # uv
 uv.lock
 
+# setuptools-scm generated version file
+modelforms/_version.py
+
 # Pytest
 .pytest_cache/
 

@@ -59,6 +59,7 @@ jobs:
         run: |
           uv run pytest -v
         env:
+          PYTHONPATH: ${{ github.workspace }}
           DJANGO_SETTINGS_MODULE: tests.settings
 
   lint:
@@ -101,6 +102,7 @@ jobs:
         run: |
           uv run pytest --cov=modelforms --cov-report=term-missing --cov-report=xml -v
         env:
+          PYTHONPATH: ${{ github.workspace }}
           DJANGO_SETTINGS_MODULE: tests.settings
 
       - name: Upload coverage to Codecov

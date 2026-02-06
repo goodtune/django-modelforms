@@ -1,10 +1,10 @@
 [build-system]
-requires = ["hatchling"]
-build-backend = "hatchling.build"
+requires = ["setuptools>=64", "setuptools-scm>=8"]
+build-backend = "setuptools.build_meta"
 
 [project]
 name = "django-modelforms"
-version = "1.0.0"
+dynamic = ["version"]
 description = "Improvements to django.forms.ModelForm - validates unique_together and UniqueConstraint"
 readme = "README.md"
 license = "BSD-3-Clause"
@@ -22,7 +22,6 @@ classifiers = [
     "Framework :: Django :: 5.2",
     "Framework :: Django :: 6.0",
     "Intended Audience :: Developers",
-    "License :: OSI Approved :: BSD License",
     "Operating System :: OS Independent",
     "Programming Language :: Python :: 3",
     "Programming Language :: Python :: 3.10",
@@ -42,16 +41,11 @@ Homepage = "https://github.com/goodtune/django-modelforms"
 Repository = "https://github.com/goodtune/django-modelforms"
 Issues = "https://github.com/goodtune/django-modelforms/issues"
 
-[tool.hatch.build.targets.wheel]
-packages = ["modelforms"]
+[tool.setuptools.packages.find]
+include = ["modelforms*"]
 
-[tool.hatch.build.targets.sdist]
-include = [
-    "/modelforms",
-    "/tests",
-    "/README.md",
-    "/LICENSE",
-]
+[tool.setuptools_scm]
+version_file = "modelforms/_version.py"
 
 [tool.coverage.run]
 source = ["modelforms"]
