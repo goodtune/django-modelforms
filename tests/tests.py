@@ -334,7 +334,7 @@ class AllConstraintFieldsTests(TestCase):
         """Test changing publisher to one where title already exists."""
         # First create a magazine with publisher2
         Magazine = apps.get_model("tests", "Magazine")
-        magazine3 = Magazine.objects.create(
+        Magazine.objects.create(
             title="Vogue", publisher=self.publisher2, issue_number=1
         )
 
