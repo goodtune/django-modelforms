@@ -1,9 +1,8 @@
-from django.conf.urls import include, url
+from django.urls import path
 
 from .views import update_book, unique_update_book
 
 urlpatterns = [
-    url(r'^book/(?P<pk>\d+)/$', update_book, name='update-book'),
-    url(r'^unique/book/(?P<pk>\d+)/$', unique_update_book,
-        name='unique-update-book'),
+    path("book/<int:pk>/", update_book, name="update-book"),
+    path("unique/book/<int:pk>/", unique_update_book, name="unique-update-book"),
 ]
