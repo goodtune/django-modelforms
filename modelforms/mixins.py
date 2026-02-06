@@ -44,9 +44,11 @@ class UniqueTogetherMixin:
                     unique_field_sets.append(tuple(constraint.fields))
 
         # Build mapping of form fields to their unique constraint groups
+        # Use self.fields.keys() to handle fields='__all__' and fields=None
+        form_fields = set(self.fields.keys())
         unique_together = {}
         for together in unique_field_sets:
-            for field_name in self._meta.fields or []:
+            for field_name in form_fields:
                 if field_name in together:
                     unique_together.setdefault(field_name, set()).update(together)
 
