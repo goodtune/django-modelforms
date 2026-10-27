@@ -46,8 +46,10 @@ class UniqueTogetherTests(TestCase):
             form.errors,
             {
                 "rrp": [
-                    "Ensure that there are no more than 3 digits before "
-                    "the decimal point."
+                    (
+                        "Ensure that there are no more than 3 digits before "
+                        "the decimal point."
+                    ),
                 ],
             },
         )
@@ -59,8 +61,10 @@ class UniqueTogetherTests(TestCase):
             form.errors,
             {
                 "rrp": [
-                    "Ensure that there are no more than 3 digits before "
-                    "the decimal point."
+                    (
+                        "Ensure that there are no more than 3 digits before "
+                        "the decimal point."
+                    ),
                 ],
             },
         )
@@ -99,8 +103,10 @@ class UniqueTogetherTests(TestCase):
             form.errors,
             {
                 "rrp": [
-                    "Ensure that there are no more than 3 digits before "
-                    "the decimal point."
+                    (
+                        "Ensure that there are no more than 3 digits before "
+                        "the decimal point."
+                    ),
                 ],
             },
         )
@@ -113,8 +119,10 @@ class UniqueTogetherTests(TestCase):
             {
                 "title": ["Book with this title already exists."],
                 "rrp": [
-                    "Ensure that there are no more than 3 digits before "
-                    "the decimal point."
+                    (
+                        "Ensure that there are no more than 3 digits before "
+                        "the decimal point."
+                    ),
                 ],
             },
         )

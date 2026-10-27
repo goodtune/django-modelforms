@@ -30,9 +30,9 @@ class Magazine(models.Model):
     issue_number = models.PositiveIntegerField()
 
     class Meta:
-        constraints = [
+        constraints = (
             models.UniqueConstraint(
                 fields=["title", "publisher"],
                 name="unique_magazine_title_per_publisher",
             ),
-        ]
+        )
