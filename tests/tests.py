@@ -452,3 +452,56 @@ class NewInstanceCreationTests(TestCase):
 
         form = self.book_form_class(data=data)
         self.assertTrue(form.is_valid())
+
+
+class CleanReturnValueTests(TestCase):
+    """The mixin must honour Django's contract that clean() returns cleaned_data."""
+
+    def setUp(self):
+        Author = apps.get_model("tests", "Author")
+        Book = apps.get_model("tests", "Book")
+        self.Book = Book
+
+        self.form_class = modelform_factory(Book, ModelForm, ("title", "rrp"))
+
+        author = Author.objects.create(name="Robert Ludlum")
+        self.book = author.books.create(title="The Bourne Identity", rrp="9.20")
+
+    def test_clean_returns_cleaned_data(self):
+        form = self.form_class(data={"title": "New Title", "rrp": "9.99"})
+        self.assertTrue(form.is_valid())
+        self.assertIs(form.clean(), form.cleaned_data)
+
+    def test_subclass_receives_cleaned_data_from_super(self):
+        received = []
+
+        class BookForm(ModelForm):
+            class Meta:
+                model = self.Book
+                fields = ("title", "rrp")
+
+            def clean(self):
+                cleaned_data = super().clean()
+                received.append(cleaned_data)
+                return cleaned_data
+
+        form = BookForm(data={"title": "New Title", "rrp": "9.99"})
+        self.assertTrue(form.is_valid())
+        self.assertEqual(len(received), 1)
+        self.assertIs(received[0], form.cleaned_data)
+        self.assertEqual(form.cleaned_data["title"], "New Title")
+
+    def test_subclass_return_value_is_not_lost(self):
+        class BookForm(ModelForm):
+            class Meta:
+                model = self.Book
+                fields = ("title", "rrp")
+
+            def clean(self):
+                cleaned_data = super().clean()
+                cleaned_data["title"] = cleaned_data["title"].upper()
+                return cleaned_data
+
+        form = BookForm(data={"title": "New Title", "rrp": "9.99"})
+        self.assertTrue(form.is_valid())
+        self.assertEqual(form.cleaned_data["title"], "NEW TITLE")
