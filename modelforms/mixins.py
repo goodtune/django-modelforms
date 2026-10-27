@@ -18,8 +18,9 @@ class UniqueTogetherMixin:
         opts = model._meta
         manager = model._default_manager
 
+        cleaned_data = None
         try:
-            super().clean()
+            cleaned_data = super().clean()
         except ValidationError as e:
             e.update_error_dict(errors)
 
@@ -71,3 +72,7 @@ class UniqueTogetherMixin:
 
         if errors:
             raise ValidationError(errors)
+
+        # Honour the Form.clean() contract so subclasses can rely on the
+        # return value of super().clean().
+        return cleaned_data if cleaned_data is not None else self.cleaned_data
