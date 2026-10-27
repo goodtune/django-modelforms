@@ -1,6 +1,6 @@
 from django.urls import path
 
-from .views import update_book, unique_update_book
+from .views import unique_update_book, update_book
 
 urlpatterns = [
     path("book/<int:pk>/", update_book, name="update-book"),

@@ -34,15 +34,15 @@ class UniqueTogetherMixin:
 
         # Modern UniqueConstraint support (from Meta.constraints)
         for constraint in opts.constraints:
-            if isinstance(constraint, UniqueConstraint):
-                # Only validate constraints without conditions or expressions
-                # Conditional constraints require runtime evaluation
-                if (
-                    not getattr(constraint, "condition", None)
-                    and not getattr(constraint, "expressions", None)
-                    and constraint.fields
-                ):
-                    unique_field_sets.append(tuple(constraint.fields))
+            # Only validate constraints without conditions or expressions
+            # Conditional constraints require runtime evaluation
+            if (
+                isinstance(constraint, UniqueConstraint)
+                and not getattr(constraint, "condition", None)
+                and not getattr(constraint, "expressions", None)
+                and constraint.fields
+            ):
+                unique_field_sets.append(tuple(constraint.fields))
 
         # Build mapping of form fields to their unique constraint groups
         # Use self.fields.keys() to handle fields='__all__' and fields=None
@@ -54,10 +54,10 @@ class UniqueTogetherMixin:
                     unique_together.setdefault(field_name, set()).update(together)
 
         queryset = manager.exclude(pk=self.instance.pk)
-        for field_name in unique_together:
+        for field_name, group in unique_together.items():
             kw = {
                 f: self.cleaned_data.get(f, getattr(self.instance, f, None))
-                for f in unique_together[field_name]
+                for f in group
             }
             if queryset.filter(**kw).exists():
                 field = opts.get_field(field_name)
